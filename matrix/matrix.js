@@ -6,6 +6,8 @@
  */
 export class Matrix {
   /**
+   * Helper function to extract rows from a string representation of a
+   * 2d matrix.
    *
    * @param {string} stringMatrix a string representation of the matrix
    * containing optional embedded newline characters.
@@ -19,24 +21,22 @@ export class Matrix {
   }
 
   /**
-   * @param {string} stringMatrix a string representation of the matrix
-   * containing optional embedded newline characters.
-   * @param {*} stringMatrix
+   * Instance method to extract columns.
+   *
    * @returns {number[][]}
    */
-  static extractColumns(stringMatrix) {
-    const rows = Matrix.extractRows(stringMatrix);
-    const numRows = rows.length;
-    const numCols = rows[0].length;
+  extractColumns() {
+    const columns = [];
+    const numRows = this.rows.length;
+    const numColumns = this.rows[0].length;
 
-    const columns = Array.from({ length: numCols }, () => []);
-
-    for (let col = 0; col < numCols; col++) {
+    for (let col = 0; col < numColumns; col++) {
+      const column = [];
       for (let row = 0; row < numRows; row++) {
-        columns[col].push(rows[row][col]);
+        column.push(this.rows[row][col]);
       }
+      columns.push(column);
     }
-    console.log(columns);
     return columns;
   }
 
@@ -48,7 +48,7 @@ export class Matrix {
    */
   constructor(stringMatrix) {
     this._rows = Matrix.extractRows(stringMatrix);
-    this._columns = Matrix.extractColumns(stringMatrix);
+    this._columns = this.extractColumns();
   }
 
   get rows() {

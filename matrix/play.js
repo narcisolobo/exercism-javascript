@@ -9,10 +9,13 @@ function extractRows(matrix) {
 
 function extractColumns(rows) {
   const columns = [];
-  for (let i = 0; i < rows.length; i++) {
+  const numRows = rows.length;
+  const numColumns = rows[0].length;
+
+  for (let col = 0; col < numColumns; col++) {
     const column = [];
-    for (let j = 0; j < rows[i].length; j++) {
-      column.push(rows[i][j]);
+    for (let row = 0; row < numRows; row++) {
+      column.push(rows[row][col]);
     }
     columns.push(column);
   }
